@@ -40,17 +40,14 @@ public class MotelRoom extends ModelCommon {
 	@Max(value = 3500000)
 	private long price;
 
-	@ManyToOne
-	@JoinColumn(name = "province_id")
-	private Province province;
+	@Column(name = "province_id")
+	private Long provinceId;
 
-	@ManyToOne
-	@JoinColumn(name = "district_id")
-	private District district;
+	@Column(name = "district_id")
+	private Long districtId;
 
-	@ManyToOne
-	@JoinColumn(name = "ward_id")
-	private Ward ward;
+	@Column(name = "ward_id")
+	private Long wardId;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")
@@ -75,20 +72,23 @@ public class MotelRoom extends ModelCommon {
 		super();
 	}
 
-	public MotelRoom(long motelId, String motelName, double acreage, long price, Province province, District district,
-			Ward ward, Account account, boolean motelStatus, String address, int maxPeople) {
+	public MotelRoom(long motelId, @NotBlank @Length(max = 100) String motelName, @Min(1) @Max(40) double acreage,
+			@Min(100000) @Max(3500000) long price, Long provinceId, Long districtId, Long wardId, Account account,
+			boolean motelStatus, @Length(max = 100) String address, @Min(1) @Max(5) int maxPeople,
+			List<Criteria> criteria) {
 		super();
 		this.motelId = motelId;
 		this.motelName = motelName;
 		this.acreage = acreage;
 		this.price = price;
-		this.province = province;
-		this.district = district;
-		this.ward = ward;
+		this.provinceId = provinceId;
+		this.districtId = districtId;
+		this.wardId = wardId;
 		this.account = account;
 		this.motelStatus = motelStatus;
 		this.address = address;
 		this.maxPeople = maxPeople;
+		this.criteria = criteria;
 	}
 
 	public long getMotelId() {
@@ -123,28 +123,28 @@ public class MotelRoom extends ModelCommon {
 		this.price = price;
 	}
 
-	public Province getProvince() {
-		return province;
+	public Long getProvinceId() {
+		return provinceId;
 	}
 
-	public void setProvince(Province province) {
-		this.province = province;
+	public void setProvinceId(Long provinceId) {
+		this.provinceId = provinceId;
 	}
 
-	public District getDistrict() {
-		return district;
+	public Long getDistrictId() {
+		return districtId;
 	}
 
-	public void setDistrict(District district) {
-		this.district = district;
+	public void setDistrictId(Long districtId) {
+		this.districtId = districtId;
 	}
 
-	public Ward getWard() {
-		return ward;
+	public Long getWardId() {
+		return wardId;
 	}
 
-	public void setWard(Ward ward) {
-		this.ward = ward;
+	public void setWardId(Long wardId) {
+		this.wardId = wardId;
 	}
 
 	public Account getAccount() {

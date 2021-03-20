@@ -26,13 +26,13 @@ public class Account extends ModelCommon {
 	@NotBlank
 	@Length(max = 50)
 	private String userName;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "role")
 	private Long role;
-	
+
 	private boolean accountStatus;
 
 	@Column(name = "name", columnDefinition = "varchar(150)")
@@ -53,7 +53,11 @@ public class Account extends ModelCommon {
 	@NotBlank
 	@Length(max = 50)
 	private String email;
+
+	@Column(name = "province_id")
 	private Long provinceId;
+
+	@Column(name = "district_id")
 	private Long districtId;
 
 	public Account() {
