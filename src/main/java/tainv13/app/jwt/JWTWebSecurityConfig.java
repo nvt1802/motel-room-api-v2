@@ -76,7 +76,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/download/*", "/api/post", "/api/image/*", "/api/image/listImage/*")
 				.antMatchers(HttpMethod.POST, "/api/discover/latest", "/api/discover/common", "/api/discover/cheap")
 				.antMatchers(HttpMethod.GET, "/api/post/viewPost/*")
-				.antMatchers(HttpMethod.GET, "/createAdmin");
+				.antMatchers(HttpMethod.GET, "/createAdmin","/api/account/getAccountFromToken/*");
 	}
 
 }

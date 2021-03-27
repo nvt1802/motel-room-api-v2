@@ -32,6 +32,7 @@ import tainv13.app.common.MessageContant;
 import tainv13.app.common.PageCommon;
 import tainv13.app.common.UsersContant;
 import tainv13.app.dto.AccountDTO;
+import tainv13.app.jwt.JwtTokenUtil;
 import tainv13.app.model.Account;
 import tainv13.app.service.AccountService;
 
@@ -45,6 +46,9 @@ public class AccountController {
 
 	@Autowired
 	private AuthCommon auth;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
 	@PostMapping("/available")
 	public ResponseEntity<?> findAllAccountAvailable(@RequestBody PageCommon pageCommon, HttpServletRequest request) {
@@ -165,5 +169,11 @@ public class AccountController {
 			errors.put(fieldName, errorMessage);
 		});
 		return errors;
+	}
+
+	@GetMapping("/getAccountFromToken/{token}")
+	public ResponseEntity<?> getAccountFromToken(@PathVariable("token") String token) {
+		String username = jwtTokenUtil.getUsernameFromToken(token);
+		return new ResponseEntity<Account>(accountService.findAccountByUserName(username), HttpStatus.OK);
 	}
 }
