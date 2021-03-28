@@ -3,6 +3,8 @@ package tainv13.app.common;
 public class PageCommon {
 	private int page;
 	private int pageSize;
+	private String sortBy;
+	private Boolean asc;
 
 	public PageCommon() {
 		super();
@@ -12,6 +14,14 @@ public class PageCommon {
 		super();
 		this.page = page;
 		this.pageSize = pageSize;
+	}
+
+	public PageCommon(int page, int pageSize, String sortBy, Boolean asc) {
+		super();
+		this.page = page;
+		this.pageSize = pageSize;
+		this.sortBy = sortBy;
+		this.asc = asc;
 	}
 
 	public int getPage() {
@@ -28,5 +38,21 @@ public class PageCommon {
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
+
+	public Boolean getAsc() {
+		return asc;
+	}
+
+	public void setAsc(Boolean asc) {
+		this.asc = asc;
 	}
 }

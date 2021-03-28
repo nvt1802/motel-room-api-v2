@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -53,7 +54,18 @@ public class AccountController {
 	@PostMapping("/available")
 	public ResponseEntity<?> findAllAccountAvailable(@RequestBody PageCommon pageCommon, HttpServletRequest request) {
 		if (auth.checkRole(UsersContant.ADMIN, request)) {
-			Pageable pageable = PageRequest.of(pageCommon.getPage(), pageCommon.getPageSize());
+			Sort sortable = null;
+			Pageable pageable = null;
+			if (pageCommon.getAsc() != null && pageCommon.getSortBy() != null) {
+				if (pageCommon.getAsc()) {
+					sortable = Sort.by(pageCommon.getSortBy()).ascending();
+				} else {
+					sortable = Sort.by(pageCommon.getSortBy()).descending();
+				}
+				pageable = PageRequest.of(pageCommon.getPage(), pageCommon.getPageSize(), sortable);
+			} else {
+				pageable = PageRequest.of(pageCommon.getPage(), pageCommon.getPageSize());
+			}
 			Page<?> accountAvailable = accountService.findAllAccountAvailable(pageable);
 			return new ResponseEntity<>(accountAvailable, HttpStatus.OK);
 		} else {
