@@ -19,9 +19,10 @@ public class MotelRoomApplication {
 				LocalDateTime now = LocalDateTime.now();
 				while (true) {
 					now = LocalDateTime.now();
-					if (now.getMinute() == 10 || now.getMinute() == 20 || now.getMinute() == 30 || now.getMinute() == 40
-							|| now.getMinute() == 50 || now.getMinute() == 0) {
+					if ((now.getMinute() == 10 || now.getMinute() == 30 || now.getMinute() == 50)
+							&& now.getSecond() == 0) {
 						System.out.println("Refesh Server");
+						continue;
 					}
 				}
 			} catch (Exception e) {
