@@ -1,5 +1,7 @@
 package tainv13.app;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +10,23 @@ public class MotelRoomApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MotelRoomApplication.class, args);
+		refeshServer();
 	}
 
+	public static void refeshServer() {
+		new Thread(() -> {
+			try {
+				LocalDateTime now = LocalDateTime.now();
+				while (true) {
+					now = LocalDateTime.now();
+					if (now.getMinute() == 10 || now.getMinute() == 20 || now.getMinute() == 30 || now.getMinute() == 40
+							|| now.getMinute() == 50 || now.getMinute() == 0) {
+						System.out.println("Refesh Server");
+					}
+				}
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		}).start();
+	}
 }
