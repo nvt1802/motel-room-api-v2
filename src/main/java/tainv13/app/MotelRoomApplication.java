@@ -10,7 +10,7 @@ public class MotelRoomApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MotelRoomApplication.class, args);
-		refeshServer();
+// 		refeshServer();
 	}
 
 	public static void refeshServer() {
